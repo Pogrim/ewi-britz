@@ -202,6 +202,10 @@ if (empty($mail_config['username']) || $mail_config['host'] === 'localhost') {
     $mail_sent = true; // Simulate success for local development
 }
 
+// Debug: Log what's happening
+error_log("Mail config check: host={$mail_config['host']}, username={$mail_config['username']}, phpmailer=" . (class_exists('PHPMailer\\PHPMailer\\PHPMailer') ? 'yes' : 'no'));
+error_log("Mail sent result: " . ($mail_sent ? 'true' : 'false'));
+
 if ($mail_sent) {
     // Update rate limiting counters
     $_SESSION['last_submission'] = time();
