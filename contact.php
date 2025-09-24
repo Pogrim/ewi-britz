@@ -187,9 +187,9 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             // Try to send - no exceptions, just return true/false
             $mail_sent = $mail->send();
 
-            // Log result only on failure
+            // Log only critical errors
             if (!$mail_sent) {
-                error_log("SMTP Error: " . $mail->ErrorInfo);
+                error_log("SMTP Failed: " . $mail->ErrorInfo);
             }
 
         } catch (\Exception $e) {
@@ -207,8 +207,6 @@ if (empty($mail_config['username']) || $mail_config['host'] === 'localhost') {
     $mail_sent = true; // Simulate success for local development
 }
 
-// Force create test log to verify we reach this point
-file_put_contents('logs/debug_test.txt', date('Y-m-d H:i:s') . " - Reached end of script, mail_sent = " . ($mail_sent ? 'true' : 'false') . "\n", FILE_APPEND);
 
 if ($mail_sent) {
     // Update rate limiting counters
@@ -227,7 +225,6 @@ if ($mail_sent) {
     }
 
     file_put_contents('logs/contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
-    file_put_contents('logs/debug_test.txt', "SUCCESS BLOCK REACHED\n", FILE_APPEND);
 
     // Clear any output buffer before sending JSON
     if (ob_get_level()) ob_clean();
