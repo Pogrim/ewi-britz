@@ -9,9 +9,9 @@ header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 
 // CORS headers for local development (restrict in production)
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: POST');
+//header('Access-Control-Allow-Headers: Content-Type');
 
 // Rate limiting setup
 if (!isset($_SESSION['last_submission'])) {
@@ -139,7 +139,7 @@ $headers = [
 
 // Try to send email (simulate success for local development)
 //$mail_sent = true; // Set to mail() function for production
- $mail_sent = mail($to, $subject, $email_content, implode("\r\n", $headers));
+$mail_sent = mail($to, $subject, $email_content, implode("\r\n", $headers));
 
 if ($mail_sent) {
     // Update rate limiting counters
