@@ -161,7 +161,7 @@ $mail_sent = false;
 if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !empty($mail_config['username'])) {
     // Use SMTP (requires PHPMailer)
     if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-        $mail = new PHPMailer(true);
+        $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
         try {
             // Server settings
@@ -170,7 +170,7 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             $mail->SMTPAuth = true;
             $mail->Username = $mail_config['username'];
             $mail->Password = $mail_config['password'];
-            $mail->SMTPSecure = $mail_config['secure'] === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
+            $mail->SMTPSecure = $mail_config['secure'] === 'tls' ? \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = $mail_config['port'];
 
             // Recipients
@@ -186,7 +186,7 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
 
             $mail_sent = $mail->send();
 
-        } catch (Exception $e) {
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
             $mail_sent = false;
             error_log("SMTP Error: {$mail->ErrorInfo}");
         }
