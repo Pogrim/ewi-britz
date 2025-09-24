@@ -16,6 +16,212 @@ body {
     background-color: #fff;
 }
 
+/* Quote Styles */
+.quote {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #666;
+    border-left: 4px solid #007bff;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+/* Quote in About/Profil Section - rechter Strich */
+.about-text .quote {
+    border-left: none;
+    border-right: 4px solid #007bff;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Services intro text */
+.services-intro {
+    margin: 1rem 0 2rem 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.services-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0 0 0;
+}
+
+.services-list li {
+    color: #007bff;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2.5rem;
+    position: relative;
+}
+
+.services-list li:before {
+    content: "▶";
+    color: #007bff;
+    position: absolute;
+    left: 1rem;
+    font-size: 0.8rem;
+    top: 0.1rem;
+}
+
+/* About content layout */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* References scrolling layout */
+.references-intro {
+    margin: 1rem 0 2rem 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.references-scroll-container {
+    overflow: hidden;
+    background: #f8f9fa;
+    padding: 1rem 0;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.references-scroll {
+    display: flex;
+    animation: scroll-left 10s linear infinite;
+    gap: 1rem;
+}
+
+.reference-box {
+    background: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.references-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* Jobs Section */
+.jobs {
+    background: #f8f9fa;
+    padding: 4rem 0;
+}
+
+.jobs-content p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Contact Section */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-details h4 {
+    color: #007bff;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.contact-details p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.contact-right {
+    margin-top: 2rem;
+}
+
+.contact-form {
+    margin-bottom: 2rem;
+}
+
+.contact-management {
+    padding-top: 1.5rem;
+}
+
+.contact-management h5 {
+    color: #007bff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-management p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.contact-management strong {
+    color: #333;
+}
+
+/* Footer */
+.footer-impressum {
+    margin-bottom: 2rem;
+}
+
+.footer-impressum > h5 {
+    color: #007bff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.impressum-content {
+    max-width: 100%;
+    margin: 0;
+}
+
+
+.impressum-liability h5 {
+    color: #007bff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.impressum-liability p {
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #444;
+    font-size: 0.9rem;
+}
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -212,14 +418,16 @@ body {
 
 .about-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 3rem;
     flex-wrap: wrap;
 }
 
 .about-image {
-    flex: 1;
-    min-width: 300px;
+    flex: 0 0 300px;
+    max-width: 300px;
+    order: 1;
+    margin-top: 35px;
 }
 
 .about-img {
@@ -229,15 +437,68 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.about-content p {
-    flex: 2;
-    min-width: 300px;
+.about-text {
+    flex: 1;
+    min-width: 400px;
+    order: 2;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+    .about-image, .about-text {
+        order: unset;
+        flex: unset;
+        max-width: 100%;
+        min-width: unset;
+    }
 }
 
 
 /* Services Section */
 .services {
     padding: 5rem 0;
+}
+
+.services-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.services-text {
+    flex: 1;
+    min-width: 400px;
+    order: 1;
+}
+
+.services-image {
+    flex: 0 0 300px;
+    max-width: 300px;
+    order: 2;
+    margin-top: 25px;
+}
+
+.services-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .services-header {
+        flex-direction: column;
+    }
+    .services-text, .services-image {
+        order: unset;
+        flex: unset;
+        max-width: 100%;
+        min-width: unset;
+    }
 }
 
 .service-image {
@@ -252,33 +513,70 @@ body {
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .service-card {
     background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.service-image {
+    flex: 0 0 120px;
+    margin-bottom: 0;
+}
+
+.service-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.service-content {
+    flex: 1;
+    text-align: left;
+}
+
+.service-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
     color: #007bff;
 }
 
-.service-card p {
-    color: #666;
+.service-content p {
+    color: #007bff;
+    margin: 0;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    .service-image {
+        flex: unset;
+    }
+    .service-content {
+        text-align: center;
+    }
 }
 
 /* References Section */

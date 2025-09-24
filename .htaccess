@@ -28,8 +28,8 @@ RewriteRule ^([^.]+)$ $1.php [NC,L]
     # Referrer Policy
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     
-    # Content Security Policy (adjust as needed)
-    Header set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:;"
+    # Content Security Policy (updated for local fonts)
+    Header set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; form-action 'self';"
 </IfModule>
 
 # Compression
@@ -73,11 +73,47 @@ RewriteRule ^([^.]+)$ $1.php [NC,L]
     ExpiresByType text/html "access plus 1 hour"
 </IfModule>
 
-# Protect sensitive files
-<FilesMatch "\.(log|txt)$">
+# Protect sensitive files and logs
+<Files "contact_log.txt">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "contact_errors.txt">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "spam_log.txt">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Block all .txt files except needed ones
+<FilesMatch "\.txt$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+# Block common attack patterns
+<IfModule mod_rewrite.c>
+    # Block SQL injection attempts
+    RewriteCond %{QUERY_STRING} [^a-zA-Z0-9\-\_\.\=\&\%\+\s] [OR]
+    RewriteCond %{QUERY_STRING} (union|select|insert|delete|update|drop|create|alter|exec|script) [NC]
+    RewriteRule .* - [F,L]
+
+    # Block XSS attempts
+    RewriteCond %{QUERY_STRING} (<script|<iframe|<object|javascript:|vbscript:|onload|onerror) [NC]
+    RewriteRule .* - [F,L]
+
+    # Block file inclusion attempts
+    RewriteCond %{QUERY_STRING} (\.\.\/|\.\.|\/etc\/passwd|\/proc\/version|php:\/\/|data:) [NC]
+    RewriteRule .* - [F,L]
+
+    # Block user agent bots and scanners
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|w3af|nmap|nessus|openvas) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
 
 # Custom error pages (optional)
 # ErrorDocument 404 /404.html
