@@ -60,7 +60,7 @@ $t = $texts[$lang];
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="images/logo.png" alt="EWI Britz Logo" class="logo">
+                    <img src="images/logo.jpg" alt="EWI Britz Logo" class="logo">
                 </div>
                 
                 <div class="nav-menu" id="nav-menu">
@@ -103,6 +103,9 @@ $t = $texts[$lang];
         <div class="container">
             <h2 class="section-title"><?php echo $t['about_title']; ?></h2>
             <div class="about-content">
+                <div class="about-image">
+                    <img src="images/pro0.jpg" alt="Über EWI Britz" class="about-img">
+                </div>
                 <p><?php echo $t['about_text']; ?></p>
             </div>
         </div>
@@ -114,14 +117,23 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['services_title']; ?></h2>
             <div class="services-grid">
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/leist1.jpg" alt="Service 1" class="service-img">
+                    </div>
                     <h3>Service 1</h3>
                     <p>Beschreibung des ersten Services.</p>
                 </div>
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/leist2.jpg" alt="Service 2" class="service-img">
+                    </div>
                     <h3>Service 2</h3>
                     <p>Beschreibung des zweiten Services.</p>
                 </div>
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/leist3.jpg" alt="Service 3" class="service-img">
+                    </div>
                     <h3>Service 3</h3>
                     <p>Beschreibung des dritten Services.</p>
                 </div>
@@ -135,12 +147,25 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['nav_references']; ?></h2>
             <div class="references-grid">
                 <div class="reference-item">
+                    <div class="reference-image">
+                        <img src="images/refe1.jpg" alt="Referenz 1" class="reference-img">
+                    </div>
                     <h4>Referenz 1</h4>
                     <p>Beschreibung der ersten Referenz.</p>
                 </div>
                 <div class="reference-item">
+                    <div class="reference-image">
+                        <img src="images/refe2.jpg" alt="Referenz 2" class="reference-img">
+                    </div>
                     <h4>Referenz 2</h4>
                     <p>Beschreibung der zweiten Referenz.</p>
+                </div>
+                <div class="reference-item">
+                    <div class="reference-image">
+                        <img src="images/refe3.jpg" alt="Referenz 3" class="reference-img">
+                    </div>
+                    <h4>Referenz 3</h4>
+                    <p>Beschreibung der dritten Referenz.</p>
                 </div>
             </div>
         </div>
@@ -152,12 +177,25 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['nav_projects']; ?></h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/pro1.jpg" alt="Projekt 1" class="project-img">
+                    </div>
                     <h4>Projekt 1</h4>
                     <p>Beschreibung des ersten Projekts.</p>
                 </div>
                 <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/pro2.jpg" alt="Projekt 2" class="project-img">
+                    </div>
                     <h4>Projekt 2</h4>
                     <p>Beschreibung des zweiten Projekts.</p>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/pro3.jpg" alt="Projekt 3" class="project-img">
+                    </div>
+                    <h4>Projekt 3</h4>
+                    <p>Beschreibung des dritten Projekts.</p>
                 </div>
             </div>
         </div>
@@ -169,6 +207,9 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['contact_title']; ?></h2>
             <div class="contact-content">
                 <div class="contact-info">
+                    <div class="contact-image">
+                        <img src="images/dia_lageplan.jpg" alt="Lageplan" class="contact-img">
+                    </div>
                     <h4>EWI Britz</h4>
                     <p>Musterstraße 123<br>12345 Berlin</p>
                     <p>Tel: +49 30 123456789<br>E-Mail: info@ewi-britz.de</p>

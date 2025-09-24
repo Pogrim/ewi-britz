@@ -134,7 +134,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: linear-gradient(rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8)), url('images/leist1_a.jpg') center/cover no-repeat;
     color: white;
     min-height: 100vh;
     display: flex;
@@ -211,16 +211,44 @@ body {
 }
 
 .about-content {
-    text-align: center;
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
 }
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-content p {
+    flex: 2;
+    min-width: 300px;
+}
+
 
 /* Services Section */
 .services {
     padding: 5rem 0;
+}
+
+.service-image {
+    margin-bottom: 1.5rem;
+}
+
+.service-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .services-grid {
@@ -259,6 +287,17 @@ body {
     background: #f8f9fa;
 }
 
+.reference-image {
+    margin-bottom: 1.5rem;
+}
+
+.reference-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 .references-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -285,6 +324,17 @@ body {
 /* Projects Section */
 .projects {
     padding: 5rem 0;
+}
+
+.project-image {
+    margin-bottom: 1.5rem;
+}
+
+.project-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .projects-grid {
@@ -319,6 +369,17 @@ body {
 .contact {
     padding: 5rem 0;
     background: #f8f9fa;
+}
+
+.contact-image {
+    margin-bottom: 1.5rem;
+}
+
+.contact-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content {
@@ -451,6 +512,16 @@ body {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-content p {
+        font-size: 1.1rem;
+        color: #666;
     }
 
     .services-grid,
