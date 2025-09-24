@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.ewi-britz.de)",
+      "WebFetch(domain:ewi-britz.de)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
