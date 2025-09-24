@@ -187,8 +187,7 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             // Try to send - no exceptions, just return true/false
             $mail_sent = $mail->send();
 
-            // Debug: Always log the result
-            error_log("Mail send attempt: " . ($mail_sent ? 'SUCCESS' : 'FAILED'));
+            // Log result only on failure
             if (!$mail_sent) {
                 error_log("SMTP Error: " . $mail->ErrorInfo);
             }
@@ -208,8 +207,7 @@ if (empty($mail_config['username']) || $mail_config['host'] === 'localhost') {
     $mail_sent = true; // Simulate success for local development
 }
 
-// Final debug log
-error_log("Final mail_sent status: " . ($mail_sent ? 'true' : 'false'));
+// Clean output before JSON response
 
 if ($mail_sent) {
     // Update rate limiting counters
@@ -221,8 +219,16 @@ if ($mail_sent) {
     $log_entry .= "Name: {$name}\n";
     $log_entry .= "Message: " . substr($message, 0, 200) . "\n";
     $log_entry .= "---\n";
+
+    // Ensure logs directory exists
+    if (!is_dir('logs')) {
+        mkdir('logs', 0755, true);
+    }
+
     file_put_contents('logs/contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
 
+    // Clear any output buffer before sending JSON
+    if (ob_get_level()) ob_clean();
     echo json_encode(['success' => true, 'message' => 'Nachricht erfolgreich gesendet']);
 } else {
     // Log failed submission with more details
