@@ -187,7 +187,8 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             // Try to send - no exceptions, just return true/false
             $mail_sent = $mail->send();
 
-            // Log any errors if send failed
+            // Debug: Always log the result
+            error_log("Mail send attempt: " . ($mail_sent ? 'SUCCESS' : 'FAILED'));
             if (!$mail_sent) {
                 error_log("SMTP Error: " . $mail->ErrorInfo);
             }
@@ -207,12 +208,8 @@ if (empty($mail_config['username']) || $mail_config['host'] === 'localhost') {
     $mail_sent = true; // Simulate success for local development
 }
 
-// Pragmatic fix: Since we confirmed SMTP works but PHPMailer throws exceptions
-// Force success when SMTP is properly configured
-if (!$mail_sent && !empty($mail_config['host']) && $mail_config['host'] !== 'localhost' &&
-    !empty($mail_config['username']) && class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
-    $mail_sent = true; // We know emails are actually being sent
-}
+// Final debug log
+error_log("Final mail_sent status: " . ($mail_sent ? 'true' : 'false'));
 
 if ($mail_sent) {
     // Update rate limiting counters
