@@ -99,7 +99,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     }
     
     // Send form data via fetch API
-    fetch('contact_simple_test.php', {
+    fetch('contact_debug.php', {
         method: 'POST',
         body: formData
     })
