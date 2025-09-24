@@ -297,7 +297,7 @@ $t = $texts[$lang];
                     </div>
                 </div>
                 <div class="contact-right">
-                    <form class="contact-form" id="contact-form">
+                    <form class="contact-form" id="contact-form" action="contact_simple_test.php">
                         <!-- CSRF Token -->
                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
