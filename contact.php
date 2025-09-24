@@ -188,7 +188,8 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
 
         } catch (\PHPMailer\PHPMailer\Exception $e) {
             $mail_sent = false;
-            error_log("SMTP Error: {$mail->ErrorInfo}");
+            error_log("SMTP Error: " . $e->getMessage());
+            error_log("PHPMailer Info: " . $mail->ErrorInfo);
         }
     } else {
         // PHPMailer not available, log error
