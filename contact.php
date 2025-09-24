@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// Load PHPMailer if available
+$phpmailer_available = false;
+if (file_exists('vendor/autoload.php')) {
+    require 'vendor/autoload.php';
+    $phpmailer_available = class_exists('PHPMailer\\PHPMailer\\PHPMailer');
+}
+
 // Security headers
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
@@ -110,9 +117,19 @@ $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 
-// Email configuration
-$to = 'garschke@gmx.de'; // Development email, change to info@ewi-britz.de for production
-//$to = 'EWI-Britz@t-online.de';
+// Email configuration from Environment Variables
+$mail_config = [
+    'host' => $_ENV['MAIL_HOST'] ?? 'localhost',
+    'port' => intval($_ENV['MAIL_PORT'] ?? 587),
+    'username' => $_ENV['MAIL_USERNAME'] ?? '',
+    'password' => $_ENV['MAIL_PASSWORD'] ?? '',
+    'secure' => $_ENV['MAIL_ENCRYPTION'] ?? 'tls',
+    'from_email' => $_ENV['MAIL_FROM'] ?? 'noreply@ewi-britz.de',
+    'from_name' => $_ENV['MAIL_FROM_NAME'] ?? 'EWI Britz Website',
+    'to' => $_ENV['MAIL_TO'] ?? 'garschke@gmx.de'
+];
+
+$to = $mail_config['to'];
 $subject = 'Neue Kontaktanfrage von ' . $name;
 
 // Email content
@@ -137,9 +154,52 @@ $headers = [
     'Content-Type: text/plain; charset=UTF-8'
 ];
 
-// Try to send email (simulate success for local development)
-//$mail_sent = true; // Set to mail() function for production
-$mail_sent = mail($to, $subject, $email_content, implode("\r\n", $headers));
+// Try to send email using SMTP if configured, fallback to mail()
+$mail_sent = false;
+
+// Check if SMTP is configured via environment variables
+if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !empty($mail_config['username'])) {
+    // Use SMTP (requires PHPMailer)
+    if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = $mail_config['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $mail_config['username'];
+            $mail->Password = $mail_config['password'];
+            $mail->SMTPSecure = $mail_config['secure'] === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = $mail_config['port'];
+
+            // Recipients
+            $mail->setFrom($mail_config['from_email'], $mail_config['from_name']);
+            $mail->addAddress($to);
+            $mail->addReplyTo($email, $name);
+
+            // Content
+            $mail->isHTML(false);
+            $mail->CharSet = 'UTF-8';
+            $mail->Subject = $subject;
+            $mail->Body = $email_content;
+
+            $mail_sent = $mail->send();
+
+        } catch (Exception $e) {
+            $mail_sent = false;
+            error_log("SMTP Error: {$mail->ErrorInfo}");
+        }
+    } else {
+        // PHPMailer not available, log error
+        error_log("PHPMailer not installed, cannot use SMTP");
+    }
+}
+
+// Development mode: Always succeed if no SMTP is configured
+if (empty($mail_config['username']) || $mail_config['host'] === 'localhost') {
+    $mail_sent = true; // Simulate success for local development
+}
 
 if ($mail_sent) {
     // Update rate limiting counters

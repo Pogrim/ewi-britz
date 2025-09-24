@@ -1,7 +1,18 @@
 # PHP
 *.log
-contact_log.txt
-contact_errors.txt
+
+# Dependencies
+/vendor/
+composer.lock
+
+# Logs
+/logs/*.txt
+!/logs/.htaccess
+
+# Config and setup files
+coolify_env_setup.md
+*.md
+!README.md
 
 # System files
 .DS_Store

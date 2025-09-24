@@ -89,11 +89,27 @@ RewriteRule ^([^.]+)$ $1.php [NC,L]
     Deny from all
 </Files>
 
-# Block all .txt files except needed ones
-<FilesMatch "\.txt$">
+# Block sensitive files
+<FilesMatch "\.(txt|md)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+# Block specific config files
+<Files "coolify_env_setup.md">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "composer.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "composer.lock">
+    Order Allow,Deny
+    Deny from all
+</Files>
 
 # Block common attack patterns
 <IfModule mod_rewrite.c>
