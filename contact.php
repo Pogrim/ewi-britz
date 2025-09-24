@@ -173,8 +173,8 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             $mail->SMTPSecure = $mail_config['secure'] === 'tls' ? \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = $mail_config['port'];
 
-            // Recipients
-            $mail->setFrom($mail_config['from_email'], $mail_config['from_name']);
+            // Recipients - Use authenticated email as FROM address
+            $mail->setFrom($mail_config['username'], $mail_config['from_name']);
             $mail->addAddress($to);
             $mail->addReplyTo($email, $name);
 
