@@ -161,9 +161,9 @@ $mail_sent = false;
 if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !empty($mail_config['username'])) {
     // Use SMTP (requires PHPMailer)
     if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-        $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-
         try {
+            $mail = new \PHPMailer\PHPMailer\PHPMailer(false); // Don't throw exceptions
+
             // Server settings
             $mail->isSMTP();
             $mail->Host = $mail_config['host'];
@@ -184,11 +184,17 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             $mail->Subject = $subject;
             $mail->Body = $email_content;
 
+            // Try to send - no exceptions, just return true/false
             $mail_sent = $mail->send();
 
-        } catch (\PHPMailer\PHPMailer\Exception $e) {
+            // Log any errors if send failed
+            if (!$mail_sent) {
+                error_log("SMTP Error: " . $mail->ErrorInfo);
+            }
+
+        } catch (\Exception $e) {
             $mail_sent = false;
-            error_log("SMTP Error: " . $e->getMessage());
+            error_log("SMTP Exception: " . $e->getMessage());
         }
     } else {
         // PHPMailer not available, log error
