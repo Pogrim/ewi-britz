@@ -221,6 +221,17 @@ body {
     font-size: 0.9rem;
 }
 
+.footer-copyright a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-copyright a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 
 .container {
     max-width: 1200px;
