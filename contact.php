@@ -1,4 +1,9 @@
 <?php
+// Clean output buffering and error reporting for JSON response
+ob_start();
+error_reporting(0);
+ini_set('display_errors', 0);
+
 session_start();
 
 // Load PHPMailer if available
@@ -72,7 +77,7 @@ $honeypot = $_POST['website'] ?? ''; // Honeypot field
 if (!empty($honeypot)) {
     // Log potential spam attempt
     $spam_log = date('Y-m-d H:i:s') . " - Spam attempt from IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
-    file_put_contents('logs/spam_log.txt', $spam_log, FILE_APPEND | LOCK_EX);
+    @file_put_contents('logs/spam_log.txt', $spam_log, FILE_APPEND | LOCK_EX);
 
     // Return success to fool bots
     echo json_encode(['success' => true, 'message' => 'Nachricht erfolgreich gesendet']);
@@ -221,19 +226,23 @@ if ($mail_sent) {
 
     // Ensure logs directory exists
     if (!is_dir('logs')) {
-        mkdir('logs', 0755, true);
+        mkdir('logs', 0777, true);
     }
 
-    file_put_contents('logs/contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
+    // Try to write log, suppress errors in production
+    @file_put_contents('logs/contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
 
     // Clear any output buffer before sending JSON
-    if (ob_get_level()) ob_clean();
+    ob_clean();
     echo json_encode(['success' => true, 'message' => 'Nachricht erfolgreich gesendet']);
+    exit;
 } else {
     // Log failed submission with more details
     $error_log = date('Y-m-d H:i:s') . " - Failed to send email from: {$email}, IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
-    file_put_contents('logs/contact_errors.txt', $error_log, FILE_APPEND | LOCK_EX);
+    @file_put_contents('logs/contact_errors.txt', $error_log, FILE_APPEND | LOCK_EX);
 
+    ob_clean();
     echo json_encode(['success' => false, 'message' => 'Fehler beim Senden der E-Mail']);
+    exit;
 }
 ?>

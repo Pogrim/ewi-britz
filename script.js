@@ -103,13 +103,26 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Invalid JSON response:', text);
+                throw new Error('Server returned invalid response');
+            }
+        });
+    })
     .then(data => {
         if (data.success) {
             showNotification('Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.', 'success');
             this.reset();
         } else {
-            showNotification('Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.', 'error');
+            const errorMsg = data.message || 'Unbekannter Fehler aufgetreten';
+            showNotification(errorMsg, 'error');
         }
     })
     .catch(error => {
