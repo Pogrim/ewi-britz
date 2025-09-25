@@ -21,6 +21,7 @@ $texts = [
         'nav_jobs' => 'Jobs',
         'nav_contact' => 'Kontakt',
         'nav_impressum' => 'Impressum',
+        'nav_agb' => 'AGB',
         'hero_title' => 'EWI - Waagenbau und Industrieelektronik GmbH',
         'hero_subtitle' => 'International tätiger Anbieter von Engineering- und technischen Dienstleistungen in der Automatisierungstechnik',
         'about_title' => 'Profil',
@@ -72,6 +73,7 @@ $texts = [
         'nav_jobs' => 'Jobs',
         'nav_contact' => 'Contact',
         'nav_impressum' => 'Legal Notice',
+        'nav_agb' => 'Terms',
         'hero_title' => 'EWI - Waagenbau und Industrieelektronik GmbH',
         'hero_subtitle' => 'International provider of engineering and technical services in automation technology',
         'about_title' => 'Profile',
@@ -333,6 +335,7 @@ $t = $texts[$lang];
             </div>
             <div class="footer-copyright">
                 <p><?php echo $t['footer_text']; ?></p>
+                <p><a href="agb.php"><?php echo $t['nav_agb']; ?></a></p>
             </div>
         </div>
     </footer>
