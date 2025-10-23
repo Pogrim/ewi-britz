@@ -180,7 +180,7 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['about_title']; ?></h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/used/342.jpeg" alt="EWI Britz Unternehmen" class="about-img">
+                    <img src="images/used/profil.jpeg" alt="EWI Britz Unternehmen" class="about-img">
                 </div>
                 <div class="about-text">
                     <blockquote class="quote"><?php echo $t['about_quote']; ?></blockquote>
@@ -208,7 +208,7 @@ $t = $texts[$lang];
                     </div>
                 </div>
                 <div class="services-image">
-                    <img src="images/used/leist1_a.jpg" alt="EWI Britz Leistungen" class="services-img">
+                    <img src="images/used/leistungen.jpg" alt="EWI Britz Leistungen" class="services-img">
                 </div>
             </div>
         </div>
