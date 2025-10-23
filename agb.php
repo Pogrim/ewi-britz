@@ -221,7 +221,7 @@ $t = $texts[$lang];
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="index.php">
-                    <img src="images/logo.jpg" alt="EWI Logo" class="logo">
+                    <img src="images/used/logo.jpg" alt="EWI Logo" class="logo">
                 </a>
             </div>
             <ul class="nav-menu">

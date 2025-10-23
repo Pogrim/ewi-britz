@@ -135,7 +135,7 @@ $t = $texts[$lang];
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="images/logo.jpg" alt="EWI Britz Logo" class="logo">
+                    <img src="images/used/logo.jpg" alt="EWI Britz Logo" class="logo">
                 </div>
                 
                 <div class="nav-menu" id="nav-menu">
@@ -168,6 +168,7 @@ $t = $texts[$lang];
             <div class="hero-content">
                 <h1 class="hero-title"><?php echo $t['hero_title']; ?></h1>
                 <p class="hero-subtitle"><?php echo $t['hero_subtitle']; ?></p>
+
                 <button class="cta-button" onclick="scrollToSection('contact')"><?php echo $t['nav_contact']; ?></button>
             </div>
         </div>
@@ -179,7 +180,7 @@ $t = $texts[$lang];
             <h2 class="section-title"><?php echo $t['about_title']; ?></h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/pro0.jpg" alt="EWI Britz Unternehmen" class="about-img">
+                    <img src="images/used/342.jpeg" alt="EWI Britz Unternehmen" class="about-img">
                 </div>
                 <div class="about-text">
                     <blockquote class="quote"><?php echo $t['about_quote']; ?></blockquote>
@@ -207,7 +208,7 @@ $t = $texts[$lang];
                     </div>
                 </div>
                 <div class="services-image">
-                    <img src="images/leist1_a.jpg" alt="EWI Britz Leistungen" class="services-img">
+                    <img src="images/used/leist1_a.jpg" alt="EWI Britz Leistungen" class="services-img">
                 </div>
             </div>
         </div>
@@ -286,7 +287,7 @@ $t = $texts[$lang];
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-image">
-                        <img src="images/dia_lageplan.jpg" alt="Lageplan" class="contact-img">
+                        <img src="images/used/dia_lageplan.jpg" alt="Lageplan" class="contact-img">
                     </div>
                     <div class="contact-details">
                         <h4><?php echo $t['contact_company']; ?></h4>
