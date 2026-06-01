@@ -6,6 +6,16 @@ ini_set('display_errors', 0);
 
 session_start();
 
+// Load .env file if present
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        [$key, $value] = array_pad(explode('=', $line, 2), 2, '');
+        $_ENV[trim($key)] = trim($value);
+    }
+}
+
 // Load PHPMailer if available
 $phpmailer_available = false;
 if (file_exists('vendor/autoload.php')) {
@@ -179,7 +189,7 @@ if (!empty($mail_config['host']) && $mail_config['host'] !== 'localhost' && !emp
             $mail->Port = $mail_config['port'];
 
             // Recipients - Use authenticated email as FROM address
-            $mail->setFrom($mail_config['username'], $mail_config['from_name']);
+            $mail->setFrom($mail_config['from_email'], $mail_config['from_name']);
             $mail->addAddress($to);
             $mail->addReplyTo($email, $name);
 
