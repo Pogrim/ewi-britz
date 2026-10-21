@@ -211,6 +211,7 @@ $t = $texts[$lang];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $t['title']; ?></title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Allgemeine Geschäftsbedingungen der EWI - Waagenbau und Industrieelektronik GmbH">
     <meta name="keywords" content="AGB, Geschäftsbedingungen, EWI, Waagenbau, Industrieelektronik">
@@ -221,7 +222,7 @@ $t = $texts[$lang];
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="index.php">
-                    <img src="images/logo.jpg" alt="EWI Logo" class="logo">
+                    <img src="images/used/logo.jpg" alt="EWI Logo" class="logo">
                 </a>
             </div>
             <ul class="nav-menu">

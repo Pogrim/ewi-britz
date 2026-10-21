@@ -222,7 +222,7 @@ function showNotification(message, type = 'info') {
 // Image preloader for better performance
 function preloadImages() {
     const imageUrls = [
-        'images/logo.jpg'
+        'images/used/logo.jpg'
         // Add more image URLs as needed
     ];
     
